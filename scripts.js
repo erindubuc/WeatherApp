@@ -1,60 +1,71 @@
-var location = document.getElementById("location");
-  	// var apiKey = "078c02a4c0504fe6828f979f75ee7fd5";
-var api = "https://fcc-weather-api.glitch.me/api/current?";
-// var api = "https://api.darksky.net/forecast/078c02a4c0504fe6828f979f75ee7fd5/";
-var lat;
-var long;
 
+/*global $*/
+/*global navigator*/
+/*global position*/
+/*global fetch*/
+/*global getLocation*/
+/*global showPosition*/
+/*global updateDataToUI*/
+/*global onchange*/
+const loc = document.getElementById("location");
+const temNum = document.getElementById("temperature-num");
+const temScale = document.getElementById("temperature-scale");
+const weatherCon = document.getElementById("weather-condition");
+const weatherIcon = document.getElementById("weather-icon");
 
-$(document).ready(function() {
-		// get location
-  	if (navigator.geolocation) {
-			// successful location
-		navigator.geolocation.getCurrentPosition(function(position) {
-					
-		var lat = position.coords.latitude;
-		var long = position.coords.longitude;
-	});
-//   function success(position) {
-//     latitude = position.coords.latitude;
-//     longitude = position.coords.longitude;
+function getLocation() {
+ if (navigator.geolocation) {
+   navigator.geolocation.getCurrentPosition(position => {
+     getWeather(position.coords.latitude, position.coords.longitude);
+   });
+ } else {
+   loc.innerHTML = "Geolocation is not supported by this browser.";
+ }
+}
 
-//     location.innerHTML =
-//       "Latitude is " + latitude + "° Longitude is " + longitude + "°";
+function getWeather(lat, long) {
+ const root = "https://fcc-weather-api.glitch.me/api/current?";
+ fetch(`${root}lat=${lat}&lon=${long}`, { method: "get" })
+   .then(resp => resp.json())
+   .then(data => {
+     updateDataToUI(data.name, data.weather, data.main.temp);
+   })
+   .catch(function(err) {
+     console.error(err);
+   });
+}
+// getting data to display on the DOM
+function updateDataToUI(location, weather, temp) {
+ weatherIcon.innerHTML = `<img src="${weather[0].icon}" />`;
+ weatherCon.innerHTML = weather[0].main;
+ loc.innerHTML = location;
+ temNum.innerHTML = `${temp}`;
+}
+// getting location when window opens
+window.onload = function() {
+ getLocation();
+};
 
-// 	// 	error - no location
-//     function error() {
-//     location.innerHTML = "Unable to retrieve your location";
-//   }
+// need to convert celsius to fahrenheit
+function cToF(celsius) {
+ return celsius * 9 / 5 + 32;
+}
+// convert fahrenheit back to celsius
+function fToC(fahrenheit) {
+ return (fahrenheit - 32) * 5 / 9;
+}
+// toggle celsius to fahrenheit and then back again
+function toggleScale() {
+ if (temScale.innerHTML === "C") {
+   temNum.innerHTML = cToF(temNum.innerHTML).toFixed(2);
+   temScale.innerHTML = "F";
+ } else if (temScale.innerHTML === 'F') {
+   temNum.innerHTML = fToC(temNum.innerHTML).toFixed(2);
+   temScale.innerHTML = "C";
+ }
+}
 
-//   location.innerHTML = "Locating...";
-// }	
-	
-	
-	
-		} else {
-				console.log("Geolocation is not supported by this browser.");
-		}
-//  $("#tempunit").click(function () {
-    // var currentTempUnit = $("#tempunit").text();
-    // var newTempUnit = currentTempUnit == "C" ? "F" : "C";
-
-$.getJSON(
-      url + apiKey + "/" + lat + "," + long + "?callback=?",
-      function(data) {
-        $("#temp").html(data.currently.temperature + "° F");
-        $("#minutely").html(data.minutely.summary);
-      }
-    );
-  
-
-
-
-//     $.getJSON(
-//       url + apiKey + "/" + latitude + "," + longitude + "?callback=?",
-//       function(data) {
-//         $("#temp").html(data.currently.temperature + "° F");
-//         $("#minutely").html(data.minutely.summary);
-//       }
-//     );
-//   }
+// event listener to change temperature scales
+$("#temScale").on('click', function(e) {
+  toggleScale();
+});
