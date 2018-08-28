@@ -5,57 +5,45 @@
     <meta charset="utf-8">
    	<link rel="stylesheet" src="styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">   
-		<style>
-			.text-center {
-				text-align: center;
-			}
-		</style>   
-    </head>
+	<style>
+	.text-center {
+	  text-align: center;
+  }
+  li {
+    display: inline;
+  }
+	</style>   
+  </head>
 <body>
-
 <div class="container">
-  <div class="title text-center"><h1>What's the Weather?</h1></div>
+  <div class="title text-center"><h1 style="padding: 25px;">What's the Weather?</h1></div>
   <br>
-  <div class="subtitle text-center">Check it out!</div>
-  <div class="weather-info text-center">
-    <h2><div id="location" class="info"></div>
-    	<div id="temperature" class="info">
-      	<span id="temperature-num"></span>
-      	<span id="temperature-scale">°C</span>
-    	</div></h2>
-    <div id="weather-condition" class="info"></div>
-    <div id="weather-icon" class="info"></div>
-  </div>
-</div>
-	
-<!--<div class="container">-->
-<!--	<div class="header text-center" style="padding: 25px;">-->
-<!--		<h1>What's the weather?</h1>-->
-<!--	</div>-->
- 	
-<!--	<div class="data">-->
-<!--			<div class="info"> -->
-<!--				<h2 id="latLon"></h2>-->
-<!--			</div>-->
-<!--			<div class="info">-->
-<!--				<h2 id="location"></h2>	-->
-<!--			</div>-->
-<!--			<div class="info">-->
-<!--				<h2 id="weather-condition"></h2>-->
-<!--				<h2 id="weather-icon"></h2>-->
-<!--			</div>	-->
-<!--			<div class="info">-->
-<!--				<h2 id="temperature-num"></h2>	-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--</div>-->
-	
+    <div class="subtitle text-center">Check it out!
+      <div class="weather-info text-center">
+        <h2 style="padding: 10px;"><div id="location" class="info"></div></h2>
+          <div class="container">
+    	      <div id="temperature">
+    	        <h2 style="padding: 10px;"><div id="temperature-num"></div></h2>
+    	       
+    	       <button id="btn-celsius" type="button" class="btn-pill btn-success active unitSwitch"><h5 style="padding: 5px;">°C</h5></button>
+             </div>
+            </div>
+          </div>
+        <h2><div id="weather-condition" class="info"></div>
+          <div id="weather-icon" class="info"></div></h2>
+        </div>
+      </div>
+
+<!--script tags
+1. popper
+2. jquery
+3. javascript
+4.bootstrap javascript-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>	
 	<script type="text/javascript" src="scripts.js"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 		
     </body>
 </html>
