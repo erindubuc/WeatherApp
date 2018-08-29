@@ -8,31 +8,55 @@
 	<style>
 	.text-center {
 	  text-align: center;
-  }
-  li {
-    display: inline;
-  }
+	}
+.btn {
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+  /* Green */
+.success {
+  border-color: #4CAF50;
+  color: green;
+}
+
+.success:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
 	</style>   
   </head>
 <body>
 <div class="container">
-  <div class="title text-center"><h1 style="padding: 25px;">What's the Weather?</h1></div>
+  <div class="title text-center"><h2 style="padding: 15px;">What's the Weather?</h2></div>
   <br>
-    <div class="subtitle text-center">Check it out!
+     <div class="subtitle text-center">Check it out!
       <div class="weather-info text-center">
-        <h2 style="padding: 10px;"><div id="location" class="info"></div></h2>
+        <h3 style="padding: 10px;"><div id="location"></div></h3>
           <div class="container">
-    	      <div id="temperature">
-    	        <h2 style="padding: 10px;"><div id="temperature-num"></div></h2>
-    	       
-    	       <button id="btn-celsius" type="button" class="btn-pill btn-success active unitSwitch"><h5 style="padding: 5px;">°C</h5></button>
+            <!--temperature display-->
+    	        <!--load in celsius-->
+    	        <h3 style="padding: 10px;" id="tempC"></h3>
+    	        <!--can toggle to fahreneheit-->
+    	        <h3 style="padding: 10px;" id="tempF"></h3>
+    	      </div>
+    	      <div id="temperature-scale" style="padding: 4px;">
+    	        <!--celsius symbol button: active - celsius unless toggled-->
+    	        <button id="celsius" onclick="toggleTempF()" class="btn pill success active">°C</button>
+    	        <!--fahrenheit symbol button: becomes active once clicked-->
+    	         <button id="fahrenheit" onclick="toggleTempC()" class="btn pill success">°F</button>
+    	         </div>
              </div>
-            </div>
-          </div>
-        <h2><div id="weather-condition" class="info"></div>
-          <div id="weather-icon" class="info"></div></h2>
+            <h3><div id="weather-condition" class="info"></div></h3>
+           <div id="weather-icon" class="info"></div>
         </div>
       </div>
+    </div>
 
 <!--script tags
 1. popper
